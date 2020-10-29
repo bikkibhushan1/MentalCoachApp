@@ -1,0 +1,211 @@
+diff --git a/node_modules/@aws-amplify/cache/lib-esm/AsyncStorageCache.d.ts b/node_modules/@aws-amplify/cache/lib-esm/AsyncStorageCache.d.ts
+index 5774d16..3ac424a 100644
+--- a/node_modules/@aws-amplify/cache/lib-esm/AsyncStorageCache.d.ts
++++ b/node_modules/@aws-amplify/cache/lib-esm/AsyncStorageCache.d.ts
+@@ -1,5 +1,5 @@
+ import StorageCache from './StorageCache';
+-import { AsyncStorage } from 'react-native';
++import AsyncStorage from '@react-native-community/async-storage';
+ import { ICache } from './types';
+ declare class AsyncStorageCache extends StorageCache implements ICache {
+     /**
+diff --git a/node_modules/@aws-amplify/cache/lib-esm/AsyncStorageCache.js b/node_modules/@aws-amplify/cache/lib-esm/AsyncStorageCache.js
+index 7faeeae..4be6eda 100644
+--- a/node_modules/@aws-amplify/cache/lib-esm/AsyncStorageCache.js
++++ b/node_modules/@aws-amplify/cache/lib-esm/AsyncStorageCache.js
+@@ -61,7 +61,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
+ };
+ import StorageCache from './StorageCache';
+ import { defaultConfig, getCurrTime } from './Utils/CacheUtils';
+-import { AsyncStorage } from 'react-native';
++import AsyncStorage from '@react-native-community/async-storage';
+ import { ConsoleLogger as Logger } from '@aws-amplify/core';
+ var logger = new Logger('AsyncStorageCache');
+ /*
+diff --git a/node_modules/@aws-amplify/cache/lib/AsyncStorageCache.d.ts b/node_modules/@aws-amplify/cache/lib/AsyncStorageCache.d.ts
+index 5774d16..3ac424a 100644
+--- a/node_modules/@aws-amplify/cache/lib/AsyncStorageCache.d.ts
++++ b/node_modules/@aws-amplify/cache/lib/AsyncStorageCache.d.ts
+@@ -1,5 +1,5 @@
+ import StorageCache from './StorageCache';
+-import { AsyncStorage } from 'react-native';
++import AsyncStorage from '@react-native-community/async-storage';
+ import { ICache } from './types';
+ declare class AsyncStorageCache extends StorageCache implements ICache {
+     /**
+diff --git a/node_modules/@aws-amplify/cache/lib/AsyncStorageCache.js b/node_modules/@aws-amplify/cache/lib/AsyncStorageCache.js
+index 233edb0..e503530 100644
+--- a/node_modules/@aws-amplify/cache/lib/AsyncStorageCache.js
++++ b/node_modules/@aws-amplify/cache/lib/AsyncStorageCache.js
+@@ -64,7 +64,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
+ var StorageCache_1 = require("./StorageCache");
+ var CacheUtils_1 = require("./Utils/CacheUtils");
+ var react_native_1 = require("react-native");
+-exports.AsyncStorage = react_native_1.AsyncStorage;
++var AsyncStorage = require('@react-native-community/async-storage').default;
++exports.AsyncStorage = AsyncStorage;
+ var core_1 = require("@aws-amplify/core");
+ var logger = new core_1.ConsoleLogger('AsyncStorageCache');
+ /*
+@@ -102,7 +103,7 @@ var AsyncStorageCache = /** @class */ (function (_super) {
+                     case 0: return [4 /*yield*/, this.getCacheCurSize()];
+                     case 1:
+                         curSize = _a.sent();
+-                        return [4 /*yield*/, react_native_1.AsyncStorage.setItem(this.cacheCurSizeKey, (curSize - amount).toString())];
++                        return [4 /*yield*/, AsyncStorage.setItem(this.cacheCurSizeKey, (curSize - amount).toString())];
+                     case 2:
+                         _a.sent();
+                         return [2 /*return*/];
+@@ -123,7 +124,7 @@ var AsyncStorageCache = /** @class */ (function (_super) {
+                     case 0: return [4 /*yield*/, this.getCacheCurSize()];
+                     case 1:
+                         curSize = _a.sent();
+-                        return [4 /*yield*/, react_native_1.AsyncStorage.setItem(this.cacheCurSizeKey, (curSize + amount).toString())];
++                        return [4 /*yield*/, AsyncStorage.setItem(this.cacheCurSizeKey, (curSize + amount).toString())];
+                     case 2:
+                         _a.sent();
+                         return [2 /*return*/];
+@@ -145,7 +146,7 @@ var AsyncStorageCache = /** @class */ (function (_super) {
+                 switch (_a.label) {
+                     case 0:
+                         item.visitedTime = CacheUtils_1.getCurrTime();
+-                        return [4 /*yield*/, react_native_1.AsyncStorage.setItem(prefixedKey, JSON.stringify(item))];
++                        return [4 /*yield*/, AsyncStorage.setItem(prefixedKey, JSON.stringify(item))];
+                     case 1:
+                         _a.sent();
+                         return [2 /*return*/, item];
+@@ -165,7 +166,7 @@ var AsyncStorageCache = /** @class */ (function (_super) {
+             var text, item;
+             return __generator(this, function (_a) {
+                 switch (_a.label) {
+-                    case 0: return [4 /*yield*/, react_native_1.AsyncStorage.getItem(key)];
++                    case 0: return [4 /*yield*/, AsyncStorage.getItem(key)];
+                     case 1:
+                         text = _a.sent();
+                         item = JSON.parse(text);
+@@ -194,7 +195,7 @@ var AsyncStorageCache = /** @class */ (function (_super) {
+                         return [3 /*break*/, 3];
+                     case 1:
+                         _c = (_b = JSON).parse;
+-                        return [4 /*yield*/, react_native_1.AsyncStorage.getItem(prefixedKey)];
++                        return [4 /*yield*/, AsyncStorage.getItem(prefixedKey)];
+                     case 2:
+                         _a = _c.apply(_b, [_d.sent()]).byteSize;
+                         _d.label = 3;
+@@ -208,7 +209,7 @@ var AsyncStorageCache = /** @class */ (function (_super) {
+                         _d.label = 5;
+                     case 5:
+                         _d.trys.push([5, 7, , 9]);
+-                        return [4 /*yield*/, react_native_1.AsyncStorage.removeItem(prefixedKey)];
++                        return [4 /*yield*/, AsyncStorage.removeItem(prefixedKey)];
+                     case 6:
+                         _d.sent();
+                         return [3 /*break*/, 9];
+@@ -247,7 +248,7 @@ var AsyncStorageCache = /** @class */ (function (_super) {
+                         _a.label = 2;
+                     case 2:
+                         _a.trys.push([2, 4, , 6]);
+-                        return [4 /*yield*/, react_native_1.AsyncStorage.setItem(prefixedKey, JSON.stringify(item))];
++                        return [4 /*yield*/, AsyncStorage.setItem(prefixedKey, JSON.stringify(item))];
+                     case 3:
+                         _a.sent();
+                         return [3 /*break*/, 6];
+@@ -322,7 +323,7 @@ var AsyncStorageCache = /** @class */ (function (_super) {
+                     case 0:
+                         keys = [];
+                         keyInCache = [];
+-                        return [4 /*yield*/, react_native_1.AsyncStorage.getAllKeys()];
++                        return [4 /*yield*/, AsyncStorage.getAllKeys()];
+                     case 1:
+                         keyInCache = _a.sent();
+                         i = 0;
+@@ -370,7 +371,7 @@ var AsyncStorageCache = /** @class */ (function (_super) {
+                         _a.label = 1;
+                     case 1:
+                         if (!(i < keys.length)) return [3 /*break*/, 4];
+-                        return [4 /*yield*/, react_native_1.AsyncStorage.getItem(keys[i])];
++                        return [4 /*yield*/, AsyncStorage.getItem(keys[i])];
+                     case 2:
+                         val = _a.sent();
+                         if (val != null) {
+@@ -477,7 +478,7 @@ var AsyncStorageCache = /** @class */ (function (_super) {
+                         _a.label = 1;
+                     case 1:
+                         _a.trys.push([1, 12, , 13]);
+-                        return [4 /*yield*/, react_native_1.AsyncStorage.getItem(prefixedKey)];
++                        return [4 /*yield*/, AsyncStorage.getItem(prefixedKey)];
+                     case 2:
+                         val = _a.sent();
+                         if (!val) return [3 /*break*/, 4];
+@@ -548,7 +549,7 @@ var AsyncStorageCache = /** @class */ (function (_super) {
+                         _a.label = 1;
+                     case 1:
+                         _a.trys.push([1, 8, , 9]);
+-                        return [4 /*yield*/, react_native_1.AsyncStorage.getItem(prefixedKey)];
++                        return [4 /*yield*/, AsyncStorage.getItem(prefixedKey)];
+                     case 2:
+                         ret = _a.sent();
+                         if (!(ret != null)) return [3 /*break*/, 7];
+@@ -607,7 +608,7 @@ var AsyncStorageCache = /** @class */ (function (_super) {
+                         _a.label = 1;
+                     case 1:
+                         _a.trys.push([1, 5, , 6]);
+-                        return [4 /*yield*/, react_native_1.AsyncStorage.getItem(prefixedKey)];
++                        return [4 /*yield*/, AsyncStorage.getItem(prefixedKey)];
+                     case 2:
+                         val = _a.sent();
+                         if (!val) return [3 /*break*/, 4];
+@@ -641,7 +642,7 @@ var AsyncStorageCache = /** @class */ (function (_super) {
+                         _a.label = 1;
+                     case 1:
+                         _a.trys.push([1, 7, , 8]);
+-                        return [4 /*yield*/, react_native_1.AsyncStorage.getAllKeys()];
++                        return [4 /*yield*/, AsyncStorage.getAllKeys()];
+                     case 2:
+                         keys = _a.sent();
+                         keysToRemove = [];
+@@ -654,7 +655,7 @@ var AsyncStorageCache = /** @class */ (function (_super) {
+                         _a.label = 3;
+                     case 3:
+                         if (!(i < keysToRemove.length)) return [3 /*break*/, 6];
+-                        return [4 /*yield*/, react_native_1.AsyncStorage.removeItem(keysToRemove[i])];
++                        return [4 /*yield*/, AsyncStorage.removeItem(keysToRemove[i])];
+                     case 4:
+                         _a.sent();
+                         _a.label = 5;
+@@ -680,11 +681,11 @@ var AsyncStorageCache = /** @class */ (function (_super) {
+             var ret;
+             return __generator(this, function (_a) {
+                 switch (_a.label) {
+-                    case 0: return [4 /*yield*/, react_native_1.AsyncStorage.getItem(this.cacheCurSizeKey)];
++                    case 0: return [4 /*yield*/, AsyncStorage.getItem(this.cacheCurSizeKey)];
+                     case 1:
+                         ret = _a.sent();
+                         if (!!ret) return [3 /*break*/, 3];
+-                        return [4 /*yield*/, react_native_1.AsyncStorage.setItem(this.cacheCurSizeKey, '0')];
++                        return [4 /*yield*/, AsyncStorage.setItem(this.cacheCurSizeKey, '0')];
+                     case 2:
+                         _a.sent();
+                         ret = '0';
+@@ -706,7 +707,7 @@ var AsyncStorageCache = /** @class */ (function (_super) {
+                 switch (_a.label) {
+                     case 0:
+                         _a.trys.push([0, 2, , 3]);
+-                        return [4 /*yield*/, react_native_1.AsyncStorage.getAllKeys()];
++                        return [4 /*yield*/, AsyncStorage.getAllKeys()];
+                     case 1:
+                         keys = _a.sent();
+                         retKeys = [];
+diff --git a/node_modules/@aws-amplify/cache/src/AsyncStorageCache.ts b/node_modules/@aws-amplify/cache/src/AsyncStorageCache.ts
+index cc10567..1aeca14 100644
+--- a/node_modules/@aws-amplify/cache/src/AsyncStorageCache.ts
++++ b/node_modules/@aws-amplify/cache/src/AsyncStorageCache.ts
+@@ -13,7 +13,7 @@
+ 
+ import StorageCache from './StorageCache';
+ import { defaultConfig, getCurrTime } from './Utils/CacheUtils';
+-import { AsyncStorage } from 'react-native';
++import AsyncStorage from '@react-native-community/async-storage';
+ import { ICache, CacheConfig, CacheItem, CacheItemOptions } from './types';
+ import { ConsoleLogger as Logger } from '@aws-amplify/core';
+ 

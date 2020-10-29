@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="46" height="46" viewBox="0 0 46 46">
+  <defs>
+    <ellipse id="ellipse-1" cx="23" cy="23" rx="18" ry="18"/>
+    <mask id="mask-2" x="0" y="0" maskContentUnits="userSpaceOnUse" maskUnits="userSpaceOnUse">
+      <rect width="46" height="46" x="0" y="0" fill="white"/>
+      <use fill="black" xlink:href="#ellipse-1"/>
+    </mask>
+  </defs>
+  <g>
+    <g>
+      <use fill="rgb(255,255,255)" xlink:href="#ellipse-1"/>
+      <use fill-opacity="0" stroke="rgb(255,255,255)" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity=".3" stroke-width="10" mask="url(#mask-2)" xlink:href="#ellipse-1"/>
+    </g>
+    <path fill="rgb(51,153,255)" fill-rule="evenodd" d="M23 5C13.07440186 5 5 13.07440186 5 23s8.07440186 18 18 18 18-8.07440186 18-18S32.92559814 5 23 5zm7.875 19.49990845h-6.37509155V30.875c0 .82809448-.67181397 1.49990845-1.49990845 1.49990845S21.50009155 31.70309448 21.50009155 30.875v-6.37509155H15.125c-.82809448 0-1.49990845-.67181397-1.49990845-1.49990845s.67181397-1.49990845 1.49990845-1.49990845h6.37509155V15.125c0-.82809448.67181397-1.49990845 1.49990845-1.49990845s1.49990845.67181397 1.49990845 1.49990845v6.37509155H30.875c.82809448 0 1.49990845.67181397 1.49990845 1.49990845S31.70309448 24.49990845 30.875 24.49990845z"/>
+  </g>
+</svg>

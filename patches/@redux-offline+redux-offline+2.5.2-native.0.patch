@@ -1,0 +1,35 @@
+diff --git a/node_modules/@redux-offline/redux-offline/lib/defaults/persist.native.js b/node_modules/@redux-offline/redux-offline/lib/defaults/persist.native.js
+index 8c4b370..d3389bf 100644
+--- a/node_modules/@redux-offline/redux-offline/lib/defaults/persist.native.js
++++ b/node_modules/@redux-offline/redux-offline/lib/defaults/persist.native.js
+@@ -9,7 +9,7 @@ exports.default = void 0;
+ 
+ var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+ 
+-var _reactNative = require("react-native");
++var AsyncStorage = require('@react-native-community/async-storage').default;
+ 
+ var _reduxPersist = require("redux-persist");
+ 
+@@ -19,7 +19,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
+ 
+ var _default = function _default(store, options, callback) {
+   return (0, _reduxPersist.persistStore)(store, _objectSpread({
+-    storage: _reactNative.AsyncStorage
++    storage: AsyncStorage
+   }, options), callback);
+ };
+ 
+diff --git a/node_modules/@redux-offline/redux-offline/src/defaults/persist.native.js b/node_modules/@redux-offline/redux-offline/src/defaults/persist.native.js
+index eca20a5..ae5132c 100644
+--- a/node_modules/@redux-offline/redux-offline/src/defaults/persist.native.js
++++ b/node_modules/@redux-offline/redux-offline/src/defaults/persist.native.js
+@@ -1,7 +1,7 @@
+ // @flow
+ 
+ // $FlowIgnore
+-import { AsyncStorage } from 'react-native'; // eslint-disable-line
++import AsyncStorage from '@react-native-community/async-storage';
+ import { persistStore } from 'redux-persist';
+ 
+ export default (store: any, options: {}, callback: any) =>

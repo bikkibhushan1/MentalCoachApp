@@ -1,0 +1,133 @@
+diff --git a/node_modules/@aws-amplify/core/lib-esm/RNComponents/reactnative.d.ts b/node_modules/@aws-amplify/core/lib-esm/RNComponents/reactnative.d.ts
+index b33b413..74692e1 100644
+--- a/node_modules/@aws-amplify/core/lib-esm/RNComponents/reactnative.d.ts
++++ b/node_modules/@aws-amplify/core/lib-esm/RNComponents/reactnative.d.ts
+@@ -1,2 +1,3 @@
+-import { Linking, AppState, AsyncStorage } from 'react-native';
++import { Linking, AppState } from 'react-native';
++import AsyncStorage from '@react-native-community/async-storage';
+ export { Linking, AppState, AsyncStorage };
+diff --git a/node_modules/@aws-amplify/core/lib-esm/RNComponents/reactnative.js b/node_modules/@aws-amplify/core/lib-esm/RNComponents/reactnative.js
+index d492d84..5f71b7f 100644
+--- a/node_modules/@aws-amplify/core/lib-esm/RNComponents/reactnative.js
++++ b/node_modules/@aws-amplify/core/lib-esm/RNComponents/reactnative.js
+@@ -10,6 +10,7 @@
+  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
+  * and limitations under the License.
+  */
+-import { Linking, AppState, AsyncStorage } from 'react-native';
++import { Linking, AppState } from 'react-native';
++import AsyncStorage from '@react-native-community/async-storage';
+ export { Linking, AppState, AsyncStorage };
+ //# sourceMappingURL=reactnative.js.map
+\ No newline at end of file
+diff --git a/node_modules/@aws-amplify/core/lib-esm/StorageHelper/reactnative.js b/node_modules/@aws-amplify/core/lib-esm/StorageHelper/reactnative.js
+index 54182c1..519c20d 100644
+--- a/node_modules/@aws-amplify/core/lib-esm/StorageHelper/reactnative.js
++++ b/node_modules/@aws-amplify/core/lib-esm/StorageHelper/reactnative.js
+@@ -10,7 +10,7 @@
+  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
+  * and limitations under the License.
+  */
+-import { AsyncStorage } from 'react-native';
++import AsyncStorage from '@react-native-community/async-storage';
+ var MEMORY_KEY_PREFIX = '@MemoryStorage:';
+ var dataMemory = {};
+ /** @class */
+diff --git a/node_modules/@aws-amplify/core/lib/RNComponents/reactnative.d.ts b/node_modules/@aws-amplify/core/lib/RNComponents/reactnative.d.ts
+index b33b413..74692e1 100644
+--- a/node_modules/@aws-amplify/core/lib/RNComponents/reactnative.d.ts
++++ b/node_modules/@aws-amplify/core/lib/RNComponents/reactnative.d.ts
+@@ -1,2 +1,3 @@
+-import { Linking, AppState, AsyncStorage } from 'react-native';
++import { Linking, AppState } from 'react-native';
++import AsyncStorage from '@react-native-community/async-storage';
+ export { Linking, AppState, AsyncStorage };
+diff --git a/node_modules/@aws-amplify/core/lib/RNComponents/reactnative.js b/node_modules/@aws-amplify/core/lib/RNComponents/reactnative.js
+index 4bdb103..9f5981c 100644
+--- a/node_modules/@aws-amplify/core/lib/RNComponents/reactnative.js
++++ b/node_modules/@aws-amplify/core/lib/RNComponents/reactnative.js
+@@ -13,7 +13,8 @@
+  */
+ Object.defineProperty(exports, "__esModule", { value: true });
+ var react_native_1 = require("react-native");
++var AsyncStorage = require('@react-native-community/async-storage').default;
+ exports.Linking = react_native_1.Linking;
+ exports.AppState = react_native_1.AppState;
+-exports.AsyncStorage = react_native_1.AsyncStorage;
++exports.AsyncStorage = AsyncStorage;
+ //# sourceMappingURL=reactnative.js.map
+\ No newline at end of file
+diff --git a/node_modules/@aws-amplify/core/lib/StorageHelper/reactnative.js b/node_modules/@aws-amplify/core/lib/StorageHelper/reactnative.js
+index f3425d4..9c12dd2 100644
+--- a/node_modules/@aws-amplify/core/lib/StorageHelper/reactnative.js
++++ b/node_modules/@aws-amplify/core/lib/StorageHelper/reactnative.js
+@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
+  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
+  * and limitations under the License.
+  */
+-var react_native_1 = require("react-native");
++var AsyncStorage = require('@react-native-community/async-storage').default;
+ var MEMORY_KEY_PREFIX = '@MemoryStorage:';
+ var dataMemory = {};
+ /** @class */
+@@ -26,7 +26,7 @@ var MemoryStorage = /** @class */ (function () {
+      * @returns {string} value that was set
+      */
+     MemoryStorage.setItem = function (key, value) {
+-        react_native_1.AsyncStorage.setItem(MEMORY_KEY_PREFIX + key, value);
++        AsyncStorage.setItem(MEMORY_KEY_PREFIX + key, value);
+         dataMemory[key] = value;
+         return dataMemory[key];
+     };
+@@ -47,7 +47,7 @@ var MemoryStorage = /** @class */ (function () {
+      * @returns {string} value - value that was deleted
+      */
+     MemoryStorage.removeItem = function (key) {
+-        react_native_1.AsyncStorage.removeItem(MEMORY_KEY_PREFIX + key);
++        AsyncStorage.removeItem(MEMORY_KEY_PREFIX + key);
+         return delete dataMemory[key];
+     };
+     /**
+@@ -65,13 +65,13 @@ var MemoryStorage = /** @class */ (function () {
+     MemoryStorage.sync = function () {
+         if (!MemoryStorage.syncPromise) {
+             MemoryStorage.syncPromise = new Promise(function (res, rej) {
+-                react_native_1.AsyncStorage.getAllKeys(function (errKeys, keys) {
++                AsyncStorage.getAllKeys(function (errKeys, keys) {
+                     if (errKeys)
+                         rej(errKeys);
+                     var memoryKeys = keys.filter(function (key) {
+                         return key.startsWith(MEMORY_KEY_PREFIX);
+                     });
+-                    react_native_1.AsyncStorage.multiGet(memoryKeys, function (err, stores) {
++                    AsyncStorage.multiGet(memoryKeys, function (err, stores) {
+                         if (err)
+                             rej(err);
+                         stores.map(function (result, index, store) {
+diff --git a/node_modules/@aws-amplify/core/src/RNComponents/reactnative.ts b/node_modules/@aws-amplify/core/src/RNComponents/reactnative.ts
+index 9b4c1bb..dbff94e 100644
+--- a/node_modules/@aws-amplify/core/src/RNComponents/reactnative.ts
++++ b/node_modules/@aws-amplify/core/src/RNComponents/reactnative.ts
+@@ -11,6 +11,6 @@
+  * and limitations under the License.
+  */
+ 
+-import { Linking, AppState, AsyncStorage } from 'react-native';
+-
++import { Linking, AppState } from 'react-native';
++import AsyncStorage from '@react-native-community/async-storage';
+ export { Linking, AppState, AsyncStorage };
+diff --git a/node_modules/@aws-amplify/core/src/StorageHelper/reactnative.ts b/node_modules/@aws-amplify/core/src/StorageHelper/reactnative.ts
+index fd3aef4..86f0005 100644
+--- a/node_modules/@aws-amplify/core/src/StorageHelper/reactnative.ts
++++ b/node_modules/@aws-amplify/core/src/StorageHelper/reactnative.ts
+@@ -10,7 +10,7 @@
+  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
+  * and limitations under the License.
+  */
+-import { AsyncStorage } from 'react-native';
++import AsyncStorage from '@react-native-community/async-storage';
+ 
+ const MEMORY_KEY_PREFIX = '@MemoryStorage:';
+ let dataMemory = {};

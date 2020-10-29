@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <path id="path-1" fill-rule="evenodd" d="M25 0c13.79787561 0 25 11.20212439 25 25v.00002c0 13.79787561-11.20212439 25-25 25s-25-11.20212439-25-25V25C0 11.20212439 11.20212439 0 25 0z"/>
+    <mask id="mask-2" x="0" y="0" maskContentUnits="userSpaceOnUse" maskUnits="userSpaceOnUse">
+      <rect width="50" height="50" x="0" y="0" fill="black"/>
+      <use fill="white" xlink:href="#path-1"/>
+    </mask>
+    <rect id="rect-3" width="18" height="18" x="14.517" y="15"/>
+    <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="userSpaceOnUse">
+      <rect width="50" height="50" x="0" y="0" fill="black"/>
+      <use fill="white" xlink:href="#rect-3"/>
+    </mask>
+  </defs>
+  <g>
+    <g>
+      <use fill="rgb(255,255,255)" xlink:href="#path-1"/>
+      <use fill-opacity="0" stroke="rgb(51,153,255)" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="4" mask="url(#mask-2)" xlink:href="#path-1"/>
+    </g>
+    <g>
+      <use fill="none" xlink:href="#rect-3"/>
+      <g mask="url(#mask-4)">
+        <path fill="rgb(51,153,255)" fill-rule="evenodd" d="M18.42868704 23.29763986l8.01022756-8.01008122C26.62418138 15.1021455 26.87149645 15 27.13520162 15s.51102024.10214551.69628702.28755864l.58989765.5897513c.38385053.38428956.38385053 1.00886985 0 1.39257404l-6.72638434 6.72638434 6.73384769 6.7338477c.18526679.18541312.28755864.43258184.28755864.69614068 0 .26385151-.10229185.51102023-.28755864.6965797l-.58989764.58960496C27.65353887 32.8978545 27.40637015 33 27.14266497 33c-.26370517 0-.51102023-.10214551-.69628702-.28755864l-8.01769091-8.01739823c-.1857058-.18599849-.28770498-.43433793-.28711962-.69833579-.00058536-.26502223.10141381-.51321534.28711962-.69906748z"/>
+      </g>
+    </g>
+  </g>
+</svg>

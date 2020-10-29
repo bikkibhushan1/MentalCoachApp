@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1062337685738",
+    "firebase_url": "https://swasth-life-coach.firebaseio.com",
+    "project_id": "swasth-life-coach",
+    "storage_bucket": "swasth-life-coach.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062337685738:android:d182455e856cc117f3cf93",
+        "android_client_info": {
+          "package_name": "co.swasth.lifecoach"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1062337685738-soghfg7ii3ocsa9cv10kaalgjljp4qps.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSQbK8bhLyZW_hTh7duaTiHm4yD9c5Hvo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1062337685738-soghfg7ii3ocsa9cv10kaalgjljp4qps.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,63 @@
+diff --git a/node_modules/react-native-image-cache-wrapper/index.js b/node_modules/react-native-image-cache-wrapper/index.js
+index 8779642..241b9fa 100644
+--- a/node_modules/react-native-image-cache-wrapper/index.js
++++ b/node_modules/react-native-image-cache-wrapper/index.js
+@@ -97,28 +97,28 @@ export default class CachedImage extends Component {
+      * @param success callback (cacheFile:string)=>{}
+      * @param failure callback (error:string)=>{}
+      */
+-    static prefetch = (url: string, expiration: number, success: Function, failure: Function) => {
+-
++    static prefetch = (url: string, cacheKey, expiration: number, success: Function, failure: Function) => {
+         // source invalidate
+         if (!url || url.toString() !== url) {
+             failure && failure("no url.");
+             return;
+         }
+ 
+-        const cacheFile = _getCacheFilename(url);
++        const cacheFile = _getCacheFilename(cacheKey || url);
+ 
+         RNFetchBlob.fs.stat(cacheFile)
+             .then((stats) => {
+                 // if exist and not expired then use it.
+                 if (!Boolean(expiration) || (expiration * 1000 + stats.lastModified) > (new Date().getTime())) {
++                    console.log("FOUND CACHE FILE", cacheKey)
+                     success && success(cacheFile);
+                 } else {
+-                    _saveCacheFile(url, success, failure);
++                    _saveCacheFile(url, cacheKey, success, failure);
+                 }
+             })
+             .catch((error) => {
+                 // not exist
+-                _saveCacheFile(url, success, failure);
++                _saveCacheFile(url, cacheKey, success, failure);
+             });
+     };
+ 
+@@ -147,7 +147,7 @@ export default class CachedImage extends Component {
+         if (this.props.source && this.props.source.uri) {
+             if (!this.state.source && !this._downloading) {
+                 this._downloading = true;
+-                CachedImage.prefetch(this.props.source.uri,
++                CachedImage.prefetch(this.props.source.uri, this.props.cacheKey,
+                     this.props.expiration,
+                     (cacheFile) => {
+                         setTimeout(() => {
+@@ -240,12 +240,12 @@ function _getCacheFilename(url) {
+  * @param success callback (cacheFile:string)=>{}
+  * @param failure callback (error:string)=>{}
+  */
+-async function _saveCacheFile(url: string, success: Function, failure: Function) {
+-
++async function _saveCacheFile(url: string, cacheKey: string, success: Function, failure: Function) {
+     try {
+         const isNetwork = !!(url && url.match(/^https?:\/\//));
+         const isBase64 = !!(url && url.match(/^data:/));
+-        const cacheFile = _getCacheFilename(url);
++        const cacheFile = _getCacheFilename(cacheKey || url);
++        console.log("SAVING CACHE FILE", cacheKey)
+ 
+         if (isNetwork) {
+             const tempCacheFile = cacheFile + '.tmp';

@@ -1,0 +1,45 @@
+diff --git a/node_modules/amazon-cognito-identity-js/lib/StorageHelper-rn.js b/node_modules/amazon-cognito-identity-js/lib/StorageHelper-rn.js
+index bd6c3e1..2919471 100644
+--- a/node_modules/amazon-cognito-identity-js/lib/StorageHelper-rn.js
++++ b/node_modules/amazon-cognito-identity-js/lib/StorageHelper-rn.js
+@@ -3,6 +3,7 @@
+ exports.__esModule = true;
+ 
+ var _reactNative = require('react-native');
++var AsyncStorage = require('@react-native-community/async-storage').default
+ 
+ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } /*!
+                                                                                                                                                            * Copyright 2016 Amazon.com,
+@@ -38,7 +39,7 @@ var MemoryStorage = function () {
+   * @returns {string} value that was set
+   */
+ 	MemoryStorage.setItem = function setItem(key, value) {
+-		_reactNative.AsyncStorage.setItem(MEMORY_KEY_PREFIX + key, value);
++		AsyncStorage.setItem(MEMORY_KEY_PREFIX + key, value);
+ 		dataMemory[key] = value;
+ 		return dataMemory[key];
+ 	};
+@@ -63,7 +64,7 @@ var MemoryStorage = function () {
+ 
+ 
+ 	MemoryStorage.removeItem = function removeItem(key) {
+-		_reactNative.AsyncStorage.removeItem(MEMORY_KEY_PREFIX + key);
++		AsyncStorage.removeItem(MEMORY_KEY_PREFIX + key);
+ 		return delete dataMemory[key];
+ 	};
+ 
+@@ -86,12 +87,12 @@ var MemoryStorage = function () {
+ 
+ 
+ 	MemoryStorage.sync = function sync(callback) {
+-		_reactNative.AsyncStorage.getAllKeys(function (errKeys, keys) {
++		AsyncStorage.getAllKeys(function (errKeys, keys) {
+ 			if (errKeys) return callback(errKeys, null);
+ 			var memoryKeys = keys.filter(function (key) {
+ 				return key.startsWith(MEMORY_KEY_PREFIX);
+ 			});
+-			_reactNative.AsyncStorage.multiGet(memoryKeys, function (err, stores) {
++			AsyncStorage.multiGet(memoryKeys, function (err, stores) {
+ 				if (err) return callback(err, null);
+ 				stores.map(function (result, index, store) {
+ 					var key = store[index][0];
